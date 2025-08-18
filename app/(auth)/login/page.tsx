@@ -21,13 +21,11 @@ import { useRouter } from 'next/navigation'
 import { useAppDispatch } from '@/app/redux/hook/hook';
 import { UserInfo } from '@/app/redux/slice/user.slice';
 import { loginUser } from '@/app/redux/slice/auth.slice';
+import { loginSchema } from './schema/login.schema';
 
 
 
-export const loginSchema = z.object({
-  emailOrUsername: z.string().min(6,{ message: 'Invalid email address' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
-});
+
 
 type LoginFormData = z.infer<typeof loginSchema>;
 

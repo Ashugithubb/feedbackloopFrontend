@@ -10,10 +10,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import { z } from "zod";
+import { disableUserSchema } from "./schema/admin.schema";
 
-export const disableUserSchema = z.object({
-    userName: z.string().min(3, { message: "User name can't be empty" })
-});
+
 
 export type DisableUserFormData = z.infer<typeof disableUserSchema>;
 

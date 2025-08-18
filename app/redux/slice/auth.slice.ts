@@ -1,5 +1,5 @@
 
-import { loginSchema } from '@/app/(auth)/login/page';
+import { loginSchema } from '@/app/(auth)/login/schema/login.schema';
 import { signupSchema } from '@/app/(auth)/signup/schema/user.schema';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';

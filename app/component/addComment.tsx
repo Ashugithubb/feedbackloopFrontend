@@ -90,7 +90,7 @@ export default function FormDialog({ feedbackId,comments }: FormDialogProps) {
       >
         <DialogTitle>Comments</DialogTitle>
         <DialogContent dividers>
-          <ViewComments comment={comments}  />
+          <ViewComments comment={comments} feedbackId={feedbackId}  />
         </DialogContent>
       </Dialog>
     </>

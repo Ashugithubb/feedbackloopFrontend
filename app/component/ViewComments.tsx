@@ -1,12 +1,16 @@
 'use client';
 
 import { useState } from "react";
-import { Box, Button, TextField, Typography, Paper, Stack } from "@mui/material";
+import { Box, Button, TextField, Typography, Paper, Stack, Avatar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../redux/hook/hook";
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import { addReply } from "../redux/thunk/AddCommentOnParent";
 
+interface commentedUser{
+   id: number,
+  user: { userName: string}                 
+}
 interface CommentType {
   id: number;
   content: string;
@@ -15,13 +19,15 @@ interface CommentType {
   deletedAt?: string | null;
   parent?: CommentType | null;
   child?: CommentType[];
+  userComment:commentedUser[];
 }
 
 interface ViewCommentsProps {
   comment: CommentType[];
+  feedbackId:number
 }
 
-export default function ViewComments({ comment }: ViewCommentsProps) {
+export default function ViewComments({ comment,feedbackId}: ViewCommentsProps,) {
   const dispatch = useAppDispatch();
 
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
@@ -33,6 +39,7 @@ export default function ViewComments({ comment }: ViewCommentsProps) {
     console.log(parentId);
 
     dispatch(addReply({
+      feedbackId,
       parentId,
       content: replyContent
     }));
@@ -47,7 +54,7 @@ export default function ViewComments({ comment }: ViewCommentsProps) {
 
         comment?.map((m, idx) => (
           <Box key={idx}>
-
+           <Typography>{m.userComment.map((g)=>g?.user?.userName)}</Typography>
             <Typography>{m.content}</Typography>
             <Typography>{new Date(m.createdAt).toLocaleString()}</Typography>
 
@@ -77,7 +84,7 @@ export default function ViewComments({ comment }: ViewCommentsProps) {
             )}
             <Box sx={{ marginLeft: "20px" }}>
               <Typography>Replies:</Typography>
-              {m.child?.map((reply, idx) => (
+              {m.child?.map((reply:any, idx:number) => (
                 <Box key={idx} sx={{ marginLeft: "20px" }}>
                   <Typography>{reply.content}</Typography>
                   <Typography>{new Date(reply.createdAt).toLocaleString()}</Typography>

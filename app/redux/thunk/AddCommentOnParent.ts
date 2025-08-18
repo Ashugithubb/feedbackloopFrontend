@@ -3,6 +3,7 @@ import axios from 'axios';
 
 
 interface ReplyPayload {
+ feedbackId:number
   parentId: number;
   content: string;
 }
@@ -15,7 +16,9 @@ export const addReply = createAsyncThunk(
       const response = await axios.post(
         `http://localhost:3001/comment/${parentId}`, 
         {
+          feedbackId:data.feedbackId,
           content: data.content,
+          
         },
         { withCredentials: true }
       );

@@ -69,7 +69,7 @@ export default function FeedbackList() {
               <Typography variant="h6" gutterBottom>
                 {item.title}
               </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
+              <Typography variant="body2" color="text.secondary" >
                 {item.description}
               </Typography>
               <Button onClick={()=>handelToggle(item.id)}><Typography variant="body2">

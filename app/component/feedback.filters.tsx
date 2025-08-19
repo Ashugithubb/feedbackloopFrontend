@@ -1,11 +1,11 @@
 "use client";
-import * as React from "react";
 import { TextField, Box } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useAppDispatch, useAppSelector } from "../redux/hook/hook";
 import { getFeedbackThunk } from "../redux/slice/feeback.slice";
 import { TagInfo, TagDetails } from "../redux/slice/tags.slice";
 import { UserDetails, UserSearch } from "../redux/slice/author.slice";
+import { useEffect, useState } from "react";
 const Scores = ["ASC", 'DESC']
 export default function FeedbackFilters() {
     const dispatch = useAppDispatch();
@@ -13,19 +13,19 @@ export default function FeedbackFilters() {
     const tagDetails = useAppSelector((state) => state.tags.tagDetails) ?? [];
     const authorDetails = useAppSelector((state) => state.author.userDetails) ?? [];
 
-    const [searchValue, setSearchValue] = React.useState("");
-    const [selectedTags, setSelectedTags] = React.useState<TagDetails[]>([]);
-    const [selectedAuthors, setSelectedAuthors] = React.useState<UserDetails[]>([]);
-    const [value, setValue] = React.useState<string | null>(Scores[0]);
-    const [inputValue, setInputValue] = React.useState('');
+    const [searchValue, setSearchValue] = useState("");
+    const [selectedTags, setSelectedTags] = useState<TagDetails[]>([]);
+    const [selectedAuthors, setSelectedAuthors] = useState<UserDetails[]>([]);
+    const [value, setValue] = useState<string | null>(Scores[0]);
+    const [inputValue, setInputValue] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(TagInfo());
         dispatch(UserSearch());
     }, [dispatch]);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         const debounce = setTimeout(() => {
 
             dispatch(

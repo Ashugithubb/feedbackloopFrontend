@@ -1,16 +1,17 @@
 'use client'
 import { Autocomplete, Box } from "@mui/material";
 import FeedbackFilters from "./feedback.filters";
-import * as React from "react";
 import { TextField } from "@mui/material";
 import { useAppDispatch } from "../redux/hook/hook";
 import { getFeedbackThunk } from "../redux/slice/feeback.slice";
+import { useEffect, useState } from "react";
 const Scores = ["false", "true",]
+
 export default function AdminFilters() {
-    const [value, setValue] = React.useState<string | null>(Scores[0]);
-    const [inputValue, setInputValue] = React.useState('');
+    const [value, setValue] = useState<string | null>(Scores[0]);
+    const [inputValue, setInputValue] = useState('');
     const dispatch = useAppDispatch();
-    React.useEffect(() => {
+    useEffect(() => {
         const debounce = setTimeout(() => {
 
             dispatch(
